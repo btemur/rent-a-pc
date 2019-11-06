@@ -1,0 +1,1 @@
+CREATE DATABASE rent_a_pc;
