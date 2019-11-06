@@ -11,6 +11,7 @@ namespace Rent_A_PC
         /// <summary>
         /// Der Haupteinstiegspunkt für die Anwendung.
         /// </summary>
+        /// johann
         [STAThread]
         static void Main()
         {
