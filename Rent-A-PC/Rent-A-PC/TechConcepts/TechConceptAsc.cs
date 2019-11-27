@@ -7,8 +7,12 @@ using Rent_A_PC.Model;
 
 namespace Rent_A_PC.TechConcepts
 {
-    class TechConceotAsc : ITechConcept
+    class TechConceptAsc : ITechConcept
     {
+        public TechConceptAsc()
+        {
+
+        }
         public List<Customer> SortCustomer()
         {
             throw new NotImplementedException();

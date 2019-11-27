@@ -16,16 +16,26 @@ namespace Rent_A_PC
         {
             InitializeComponent();
         }
-        private void textBox1_TextChanged(object sender, EventArgs e)
+        private void TextBoxPCName_TextChanged(object sender, EventArgs e)
         {
-            if (textBox1.Text == "")
-            {
-                buttonNewName.Enabled = false;
-            }
-            else
-            {
-                buttonNewName.Enabled = true;
-            }
+            CheckBox checkBox = cb_LeaseState;
+            Button button = buttonAddNewItem;
+            TextBox textBox = textBoxPCName;
+            ChangeCheckBoxState(checkBox, textBox);
+            ChangeButtonsState(button, textBox);
+        }
+        bool ChangeButtonsState(Button button, TextBox textBox)
+        {
+            return button.Enabled = String.IsNullOrWhiteSpace(textBox.Text) ? false : true;
+        }
+        bool ChangeCheckBoxState(CheckBox checkBox, TextBox textBox)
+        {
+            return checkBox.Enabled = String.IsNullOrWhiteSpace(textBox.Text) ? false : true;
+        }
+
+        private void buttonExit_Click(object sender, EventArgs e)
+        {
+            this.Close();
         }
     }
 }
