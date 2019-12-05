@@ -1,0 +1,44 @@
+{
+    "value_customer": [
+        {
+            "id": 1,
+            "name": "Kadie Lovell"
+        },
+		{
+            "id": 2,
+            "name": "Jan Feeney"
+        },
+		{
+            "id": 3,
+            "name": "Jonah Ingram"
+        },
+		{
+            "id": 4,
+            "name": "Alan Crowther"
+        },
+		{
+            "id": 5,
+            "name": "Keaton Clarke"
+        },
+		{
+            "id": 6,
+            "name": "Aleisha Kouma"
+        },
+		{
+            "id": 7,
+            "name": "Nabil Bradshaw"
+        },
+		{
+            "id": 8,
+            "name": "Elias Cobb"
+        },
+		{
+            "id": 9,
+            "name": "Harvey-Lee Davila"
+        },
+		{
+            "id": 10,
+            "name": "Sammy-Jo Mullins"
+        }
+		]
+}

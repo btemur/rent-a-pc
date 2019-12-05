@@ -1,0 +1,34 @@
+{
+    "value_pc": [
+        {
+            "id": 1,
+            "name": "Office PC",
+            "leased": null
+        },
+        {
+            "id": 2,
+            "name": "Gaming 1",
+            "leased": 2
+        },
+		{
+            "id": 3,
+            "name": "Gaming 2",
+            "leased": null
+        },
+		{
+            "id": 4,
+            "name": "Laptop 007",
+            "leased": null
+        },
+		{
+            "id": 5,
+            "name": "Laptop 44",
+            "leased": null
+        },
+		{
+            "id": 6,
+            "name": "Budget PC",
+            "leased": 6
+        }
+		]
+}
