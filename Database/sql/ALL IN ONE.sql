@@ -1,11 +1,16 @@
+DROP DATABASE IF EXISTS rent_a_pc;
 CREATE DATABASE rent_a_pc;
 
+USE rent_a_pc;
+
+DROP TABLE IF EXISTS user;
 CREATE TABLE user (
     userid int NOT NULL AUTO_INCREMENT,
     user varchar(255) NOT NULL,
     PRIMARY KEY (userid)
 );
 
+DROP TABLE IF EXISTS pc;
 CREATE TABLE pc (
     pcid int NOT NULL AUTO_INCREMENT,
     pc varchar(255) NOT NULL,
@@ -27,11 +32,11 @@ values
 ("Harvey-Lee Davila"),
 ("Sammy-Jo Mullins");
 
-insert into pc(pc,leasedto)
+insert into pc(pc, leasedto)
 values
-("Office PC",null),
-("Gaming 1",2),
-("Gaming 2",null),
-("Laptop 007",null),
-("Laptop 44",null),
-("Budget PC",6)
+("Office PC", null),
+("Gaming 1", 2),
+("Gaming 2", null),
+("Laptop 007", null),
+("Laptop 44", null),
+("Budget PC", 6)
