@@ -1,11 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
 using System.Data;
 using System.Drawing;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace Rent_A_PC
@@ -16,6 +13,7 @@ namespace Rent_A_PC
         {
             InitializeComponent();
         }
+        
         private void TextBoxPCName_TextChanged(object sender, EventArgs e)
         {
             CheckBox checkBox = cb_LeaseState;

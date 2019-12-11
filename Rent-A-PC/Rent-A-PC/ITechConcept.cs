@@ -10,6 +10,6 @@ namespace Rent_A_PC
     interface ITechConcept
     {
         List<Pc> SortPc();
-        List<Customer> SortCustomer();
+        List<User> SortCustomer();
     }
 }

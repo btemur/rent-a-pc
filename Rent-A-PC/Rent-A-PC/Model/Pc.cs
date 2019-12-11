@@ -10,5 +10,6 @@ namespace Rent_A_PC.Model
     {
         public int Id { get; set; }
         public string Name { get; set; }
+        public int leasedTo { get; set; }
     }
 }

@@ -11,14 +11,21 @@ namespace Rent_A_PC
     {
         //Pc
         //bool Save();
-        bool Insert(List<Pc> pcs);
-        bool Update(Pc pc);
-        bool Delete(Pc pc);
+        void Insert(List<Pc> pcs);
+        void Update(Pc pc);
+        void Delete(Pc pc);
 
         //Customer
         //bool Save();
-        bool Insert(List<Customer> customers);
-        bool Update(Customer customers);
-        bool Delete(Customer custormers);
+        void Insert(List<User> users);
+        void Update(User users);
+        void Delete(User users);
+
+        //Get Values
+        //int Pc_id();
+        //string Pc_name();
+        //int Pc_leasedTo();
+        //int User_id();
+        //string User_name();
     }
 }
