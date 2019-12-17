@@ -40,7 +40,7 @@ namespace Rent_A_PC.DataManagement
             string query = String.Format("DELETE FROM `pc` WHERE `pcid` = {0};", pcid);
             bool requestResult = MySqlRequest(query);
 
-            if(requestResult == true)
+            if (requestResult == true)
             {
                 Console.WriteLine("Delete successful");
             }
@@ -68,46 +68,40 @@ namespace Rent_A_PC.DataManagement
             }
         }
 
-        public void Insert(List<Pc> pcs)
+        public void Insert(Pc pcs)
         {
-            foreach(var item in pcs)
-            {
-                int pcid = item.Id;
-                string pcname = item.Name;
-                int leasedto = item.leasedTo;
-                string query = String.Format("INSERT INTO `pc` (id, pc, leasedto) VALUES ({0}, `{1}`, {2});", pcid, pcname, leasedto);
-                bool requestResult = MySqlRequest(query);
+            int pcid = pcs.Id;
+            string pcname = pcs.Name;
+            int leasedto = pcs.leasedTo;
+            string query = String.Format("INSERT INTO `pc` (id, pc, leasedto) VALUES ({0}, `{1}`, {2});", pcid, pcname, leasedto);
+            bool requestResult = MySqlRequest(query);
 
-                if (requestResult == true)
-                {
-                    Console.WriteLine("Insert successful");
-                }
-                else
-                {
-                    Console.WriteLine("Insert failed");
-                    //TODO: Handling.
-                }
+            if (requestResult == true)
+            {
+                Console.WriteLine("Insert successful");
+            }
+            else
+            {
+                Console.WriteLine("Insert failed");
+                //TODO: Handling.
             }
         }
 
-        public void Insert(List<User> users)
+        public void Insert(User users)
         {
-            foreach (var item in users)
-            {
-                int userid = item.Id;
-                string username = item.Name;
-                string query = String.Format("INSERT INTO `user` (id, user) VALUES ({0}, `{1}`);", userid, username);
-                bool requestResult = MySqlRequest(query);
+            int userid = users.Id;
+            string username = users.Name;
+            string query = String.Format("INSERT INTO `user` (id, user) VALUES ({0}, `{1}`);", userid, username);
+            bool requestResult = MySqlRequest(query);
 
-                if (requestResult == true)
-                {
-                    Console.WriteLine("Insert successful");
-                }
-                else
-                {
-                    Console.WriteLine("Insert failed");
-                    //TODO: Handling.
-                }
+            if (requestResult == true)
+            {
+                Console.WriteLine("Insert successful");
+            }
+            else
+            {
+                Console.WriteLine("Insert failed");
+                //TODO: Handling.
             }
         }
 

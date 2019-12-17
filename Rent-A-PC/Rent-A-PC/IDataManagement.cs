@@ -11,13 +11,13 @@ namespace Rent_A_PC
     {
         //Pc
         //bool Save();
-        void Insert(List<Pc> pcs);
+        void Insert(Pc pcs);
         void Update(Pc pc);
         void Delete(Pc pc);
 
         //Customer
         //bool Save();
-        void Insert(List<User> users);
+        void Insert(User users);
         void Update(User users);
         void Delete(User users);
 
