@@ -7,7 +7,7 @@ using Rent_A_PC.Model;
 
 namespace Rent_A_PC
 {
-    interface IDataManagement
+    public interface IDataManagement
     {
         //Pc
         //bool Save();

@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using Rent_A_PC.DataManagement;
+using Rent_A_PC.TechConcepts;
 
 namespace Rent_A_PC
 {
@@ -16,7 +18,7 @@ namespace Rent_A_PC
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new Form1());
+            Application.Run(new Form1(new TechConceptAsc(new DataManagementSQL())));
             
         }
     }
