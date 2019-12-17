@@ -5,6 +5,9 @@ using System.Drawing;
 using System.Linq;
 using System.Windows.Forms;
 
+
+using Rent_A_PC.DataManagement;
+
 namespace Rent_A_PC
 {
     public partial class Form1 : Form
@@ -12,6 +15,14 @@ namespace Rent_A_PC
         public Form1()
         {
             InitializeComponent();
+            DataManagementSQL data = new DataManagementSQL();
+
+            foreach(var item in data.AllPcs())
+            {
+                Console.WriteLine(item.Id);
+                Console.WriteLine(item.Name);
+                Console.WriteLine(item.leasedTo);
+            }
         }
         
         private void TextBoxPCName_TextChanged(object sender, EventArgs e)

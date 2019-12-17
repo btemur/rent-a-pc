@@ -9,6 +9,16 @@ namespace Rent_A_PC.DataManagement
 {
     class DataManagementJson : IDataManagement
     {
+        public List<Pc> AllPcs()
+        {
+            throw new NotImplementedException();
+        }
+
+        public List<User> AllUsers()
+        {
+            throw new NotImplementedException();
+        }
+
         public void Delete(Pc pc)
         {
             throw new NotImplementedException();
@@ -19,27 +29,12 @@ namespace Rent_A_PC.DataManagement
             throw new NotImplementedException();
         }
 
-        public void Insert(List<Pc> pcs)
+        public void Insert(Pc pcs)
         {
             throw new NotImplementedException();
         }
 
-        public void Insert(List<User> users)
-        {
-            throw new NotImplementedException();
-        }
-
-        public int Pc_id()
-        {
-            throw new NotImplementedException();
-        }
-
-        public int Pc_leasedTo()
-        {
-            throw new NotImplementedException();
-        }
-
-        public string Pc_name()
+        public void Insert(User users)
         {
             throw new NotImplementedException();
         }
@@ -50,16 +45,6 @@ namespace Rent_A_PC.DataManagement
         }
 
         public void Update(User users)
-        {
-            throw new NotImplementedException();
-        }
-
-        public int User_id()
-        {
-            throw new NotImplementedException();
-        }
-
-        public string User_name()
         {
             throw new NotImplementedException();
         }
