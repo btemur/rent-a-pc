@@ -7,16 +7,107 @@ using Rent_A_PC.Model;
 
 namespace Rent_A_PC.TechConcepts
 {
-    class TechConceptDesc : ITechConcept
+    public class TechConceptDesc : ITechConcept
     {
+        IDataManagement dm;
+        public TechConceptDesc(IDataManagement dm)
+        {
+            this.dm = dm;
+        }
+
+
         public List<User> SortCustomer()
         {
-            throw new NotImplementedException();
+            List<User> sortedList = dm.AllUsers().OrderBy(o => o.Name).ToList();
+            sortedList.Reverse();
+            return sortedList;
         }
 
         public List<Pc> SortPc()
         {
-            throw new NotImplementedException();
+            List<Pc> sortedList = dm.AllPcs().OrderBy(o => o.Name).ToList();
+            sortedList.Reverse();
+            return sortedList;
+        }
+
+
+        public Pc GetSelectedPc(string name)
+        {
+            Pc selectedPc = new Pc();
+            foreach(var item in dm.AllPcs())
+            {
+                if(item.Name.ToString() == name)
+                {
+                    selectedPc.Id = item.Id;
+                    selectedPc.Name = item.Name;
+                    selectedPc.leasedTo = item.leasedTo;
+                }
+            }
+            return selectedPc;
+        }
+
+        public User GetSelectedUser(string name)
+        {
+            User selectedUser = new User();
+            foreach (var item in dm.AllUsers())
+            {
+                if (item.Name.ToString() == name)
+                {
+                    selectedUser.Id = item.Id;
+                    selectedUser.Name = item.Name;
+                }
+            }
+            return selectedUser;
+        }
+
+        public List<User> LeasedUser()
+        {
+            List<Pc> pcsLeased = dm.AllPcs().Where(x => x.leasedTo >= 1).ToList();
+
+            List<User> userHasLeased = new List<User>();
+            foreach (var item in pcsLeased)
+            {
+                User tempUser = dm.AllUsers().Where(x => x.Id == item.Id).FirstOrDefault();
+                userHasLeased.Add(tempUser);
+            }
+            userHasLeased.Reverse();
+            return userHasLeased;
+            //dm.AllUsers().Where(x => x.Id == item.Id).ToList();
+        }
+
+        public List<Pc> LeasedPc()
+        {
+            List<Pc> pcsLeased = dm.AllPcs().Where(x => x.leasedTo >= 1).ToList();
+            pcsLeased.Reverse();
+            return pcsLeased;
+        }
+        public List<User> NonLeasedUser()
+        {
+            List<Pc> pcsUnLeased = dm.AllPcs().Where(x => x.leasedTo == 0).ToList();
+
+            List<User> userHasNonLeased = new List<User>();
+            foreach (var item in pcsUnLeased)
+            {
+                User tempUser = dm.AllUsers().Where(x => x.Id == item.Id).FirstOrDefault();
+                userHasNonLeased.Add(tempUser);
+            }
+            userHasNonLeased.Reverse();
+            return userHasNonLeased;
+            //dm.AllUsers().Where(x => x.Id == item.Id).ToList();
+        }
+
+        public List<Pc> NonLeasedPc()
+        {
+            List<Pc> pcsNonLeased = dm.AllPcs().Where(x => x.leasedTo == 0).ToList();
+            pcsNonLeased.Reverse();
+            return pcsNonLeased;
+        }
+        public void InsertPcIntoDb(string pcname)
+        {
+            Pc newPc = new Pc();
+            newPc.Name = pcname;
+            newPc.leasedTo = 0;
+            dm.Insert(newPc);
         }
     }
 }

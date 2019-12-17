@@ -32,7 +32,7 @@
             this.rbPc = new System.Windows.Forms.RadioButton();
             this.rbCustomer = new System.Windows.Forms.RadioButton();
             this.lableInfo = new System.Windows.Forms.Label();
-            this.richTextBox1 = new System.Windows.Forms.RichTextBox();
+            this.infoBox = new System.Windows.Forms.RichTextBox();
             this.rbFilterAll = new System.Windows.Forms.RadioButton();
             this.rbFilterLeased = new System.Windows.Forms.RadioButton();
             this.rbFilterAvailable = new System.Windows.Forms.RadioButton();
@@ -57,6 +57,7 @@
             this.listBox.Name = "listBox";
             this.listBox.Size = new System.Drawing.Size(115, 329);
             this.listBox.TabIndex = 0;
+            this.listBox.SelectedIndexChanged += new System.EventHandler(this.listBox_SelectedIndexChanged);
             // 
             // rbPc
             // 
@@ -68,6 +69,7 @@
             this.rbPc.TabStop = true;
             this.rbPc.Text = "PC";
             this.rbPc.UseVisualStyleBackColor = true;
+            this.rbPc.CheckedChanged += new System.EventHandler(this.rbPc_CheckedChanged);
             // 
             // rbCustomer
             // 
@@ -79,6 +81,7 @@
             this.rbCustomer.TabStop = true;
             this.rbCustomer.Text = "Customer";
             this.rbCustomer.UseVisualStyleBackColor = true;
+            this.rbCustomer.CheckedChanged += new System.EventHandler(this.rbCustomer_CheckedChanged);
             // 
             // lableInfo
             // 
@@ -89,18 +92,19 @@
             this.lableInfo.TabIndex = 3;
             this.lableInfo.Text = "Info:";
             // 
-            // richTextBox1
+            // infoBox
             // 
-            this.richTextBox1.Location = new System.Drawing.Point(6, 59);
-            this.richTextBox1.Name = "richTextBox1";
-            this.richTextBox1.ReadOnly = true;
-            this.richTextBox1.Size = new System.Drawing.Size(436, 261);
-            this.richTextBox1.TabIndex = 5;
-            this.richTextBox1.Text = "";
+            this.infoBox.Location = new System.Drawing.Point(6, 59);
+            this.infoBox.Name = "infoBox";
+            this.infoBox.ReadOnly = true;
+            this.infoBox.Size = new System.Drawing.Size(436, 261);
+            this.infoBox.TabIndex = 5;
+            this.infoBox.Text = "";
             // 
             // rbFilterAll
             // 
             this.rbFilterAll.AutoSize = true;
+            this.rbFilterAll.Checked = true;
             this.rbFilterAll.Location = new System.Drawing.Point(44, 19);
             this.rbFilterAll.Name = "rbFilterAll";
             this.rbFilterAll.Size = new System.Drawing.Size(35, 17);
@@ -108,6 +112,7 @@
             this.rbFilterAll.TabStop = true;
             this.rbFilterAll.Text = "all";
             this.rbFilterAll.UseVisualStyleBackColor = true;
+            this.rbFilterAll.CheckedChanged += new System.EventHandler(this.rbFilterAll_CheckedChanged);
             // 
             // rbFilterLeased
             // 
@@ -119,6 +124,7 @@
             this.rbFilterLeased.TabStop = true;
             this.rbFilterLeased.Text = "leased";
             this.rbFilterLeased.UseVisualStyleBackColor = true;
+            this.rbFilterLeased.CheckedChanged += new System.EventHandler(this.rbFilterLeased_CheckedChanged);
             // 
             // rbFilterAvailable
             // 
@@ -127,9 +133,9 @@
             this.rbFilterAvailable.Name = "rbFilterAvailable";
             this.rbFilterAvailable.Size = new System.Drawing.Size(67, 17);
             this.rbFilterAvailable.TabIndex = 8;
-            this.rbFilterAvailable.TabStop = true;
             this.rbFilterAvailable.Text = "available";
             this.rbFilterAvailable.UseVisualStyleBackColor = true;
+            this.rbFilterAvailable.CheckedChanged += new System.EventHandler(this.rbFilterAvailable_CheckedChanged);
             // 
             // buttonAddNewItem
             // 
@@ -140,6 +146,7 @@
             this.buttonAddNewItem.TabIndex = 9;
             this.buttonAddNewItem.Text = "Add new";
             this.buttonAddNewItem.UseVisualStyleBackColor = true;
+            this.buttonAddNewItem.Click += new System.EventHandler(this.buttonAddNewItem_Click);
             // 
             // buttonUpdate
             // 
@@ -212,7 +219,7 @@
             this.gb_Output.Controls.Add(this.rbFilterLeased);
             this.gb_Output.Controls.Add(this.lableInfo);
             this.gb_Output.Controls.Add(this.buttonDelete);
-            this.gb_Output.Controls.Add(this.richTextBox1);
+            this.gb_Output.Controls.Add(this.infoBox);
             this.gb_Output.Controls.Add(this.buttonUpdate);
             this.gb_Output.Location = new System.Drawing.Point(149, 12);
             this.gb_Output.Name = "gb_Output";
@@ -266,7 +273,7 @@
         private System.Windows.Forms.RadioButton rbPc;
         private System.Windows.Forms.RadioButton rbCustomer;
         private System.Windows.Forms.Label lableInfo;
-        private System.Windows.Forms.RichTextBox richTextBox1;
+        private System.Windows.Forms.RichTextBox infoBox;
         private System.Windows.Forms.RadioButton rbFilterAll;
         private System.Windows.Forms.RadioButton rbFilterLeased;
         private System.Windows.Forms.RadioButton rbFilterAvailable;

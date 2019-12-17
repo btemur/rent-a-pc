@@ -22,9 +22,11 @@ namespace Rent_A_PC.DataManagement
             try
             {
                 MySqlConnection mySqlConnection = new MySqlConnection(connString);
+                mySqlConnection.Open();
                 MySqlCommand mySqlCommand = mySqlConnection.CreateCommand();
                 mySqlCommand.CommandText = query;
                 mySqlCommand.ExecuteNonQuery();
+                mySqlConnection.Close();
                 return true;
             }
             catch (Exception ex)
@@ -70,10 +72,9 @@ namespace Rent_A_PC.DataManagement
 
         public void Insert(Pc pcs)
         {
-            int pcid = pcs.Id;
             string pcname = pcs.Name;
             int leasedto = pcs.leasedTo;
-            string query = String.Format("INSERT INTO `pc` (id, pc, leasedto) VALUES ({0}, `{1}`, {2});", pcid, pcname, leasedto);
+            string query = String.Format("INSERT INTO `pc` (pc, leasedto) VALUES (`{0}`, {1});", pcname, leasedto);
             bool requestResult = MySqlRequest(query);
 
             if (requestResult == true)
