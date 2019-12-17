@@ -22,12 +22,6 @@ namespace Rent_A_PC
             {
                 Console.WriteLine(item.Id + item.Name + item.leasedTo);
             }
-            Console.WriteLine("user");
-            foreach (var item in data.AllUsers())
-            {
-                
-                Console.WriteLine(item.Id + item.Name);
-            }
         }
         
         private void TextBoxPCName_TextChanged(object sender, EventArgs e)
