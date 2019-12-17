@@ -44,6 +44,7 @@ namespace Rent_A_PC
 
         private void rbPc_CheckedChanged(object sender, EventArgs e)
         {
+            lablePcName.Text = "PC Name:";
             rbFilterAll.Checked = true;
             listBox.Items.Clear();
             foreach(var item in tc.SortPc())
@@ -53,6 +54,7 @@ namespace Rent_A_PC
         }
         private void rbCustomer_CheckedChanged(object sender, EventArgs e)
         {
+            lablePcName.Text = "Customer Name:";
             rbFilterAll.Checked = true;
             listBox.Items.Clear();
             foreach (var item in tc.SortCustomer())
@@ -154,8 +156,15 @@ namespace Rent_A_PC
 
         private void buttonAddNewItem_Click(object sender, EventArgs e)
         {
-            string pcname = textBoxPCName.Text.ToString();
-            tc.InsertPcIntoDb(pcname);
+            string itemText = textBoxPCName.Text.ToString();
+            if (rbCustomer.Checked == true)
+            {
+                tc.InsertUserIntoDb(itemText);
+            }
+            else
+            {
+                tc.InsertPcIntoDb(itemText);
+            }
         }
 
         private void buttonDelete_Click(object sender, EventArgs e)

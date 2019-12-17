@@ -21,6 +21,7 @@ namespace Rent_A_PC
 
         //Datenbank Zeug
         void InsertPcIntoDb(string pcname);
+        void InsertUserIntoDb(string username);
         void DeletePcFromDb(string name);
         void DeleteUserFromDb(string name);
         void UpdatePcFromDb(string oldName, string newName);

@@ -14,8 +14,6 @@ namespace Rent_A_PC.TechConcepts
         {
             this.dm = dm;
         }
-
-
         public List<User> SortCustomer()
         {
             List<User> sortedList = dm.AllUsers().OrderBy(o => o.Name).ToList();
@@ -84,16 +82,17 @@ namespace Rent_A_PC.TechConcepts
         public List<User> NonLeasedUser()
         {
             List<Pc> pcsUnLeased = dm.AllPcs().Where(x => x.leasedTo == 0).ToList();
-
+            List<User> allUsers = dm.AllUsers();
             List<User> userHasNonLeased = new List<User>();
+
             foreach (var item in pcsUnLeased)
             {
-                User tempUser = dm.AllUsers().Where(x => x.Id == item.Id).FirstOrDefault();
-                userHasNonLeased.Add(tempUser);
+                userHasNonLeased = dm.AllUsers().Where(x => x.Id != item.leasedTo).ToList();
+                //User tempUser = allUsers.Where(x => x.Id == item.Id).FirstOrDefault();
+                //userHasNonLeased.Add(tempUser);
             }
             userHasNonLeased.Reverse();
             return userHasNonLeased;
-            //dm.AllUsers().Where(x => x.Id == item.Id).ToList();
         }
 
         public List<Pc> NonLeasedPc()
@@ -101,13 +100,6 @@ namespace Rent_A_PC.TechConcepts
             List<Pc> pcsNonLeased = dm.AllPcs().Where(x => x.leasedTo == 0).ToList();
             pcsNonLeased.Reverse();
             return pcsNonLeased;
-        }
-        public void InsertPcIntoDb(string pcname)
-        {
-            Pc newPc = new Pc();
-            newPc.Name = pcname;
-            newPc.leasedTo = 0;
-            dm.Insert(newPc);
         }
 
         public void DeletePcFromDb(string name)
@@ -141,12 +133,53 @@ namespace Rent_A_PC.TechConcepts
 
         public void UpdatePcFromDb(string oldName, string newName)
         {
-            throw new NotImplementedException();
+            Pc newPc = new Pc();
+            Pc oldPc = new Pc();
+            foreach (var item in dm.AllPcs())
+            {
+                if (item.Name.ToString() == oldName)
+                {
+                    oldPc.Id = item.Id;
+                    oldPc.Name = item.Name;
+                    oldPc.leasedTo = item.leasedTo;
+                }
+            }
+            newPc.Id = oldPc.Id;
+            newPc.Name = newName;
+            newPc.leasedTo = oldPc.leasedTo;
+
+            dm.Update(oldPc, newPc);
         }
 
         public void UpdateUserFromDb(string oldName, string newName)
         {
-            throw new NotImplementedException();
+            User newUser = new User();
+            User oldUser = new User();
+            foreach (var item in dm.AllUsers())
+            {
+                if (item.Name.ToString() == oldName)
+                {
+                    oldUser.Id = item.Id;
+                    oldUser.Name = item.Name;
+                }
+            }
+            newUser.Id = oldUser.Id;
+            newUser.Name = newName;
+
+            dm.Update(oldUser, newUser);
+        }
+        public void InsertPcIntoDb(string pcname)
+        {
+            Pc newPc = new Pc();
+            newPc.Name = pcname;
+            newPc.leasedTo = 0;
+            dm.Insert(newPc);
+        }
+        public void InsertUserIntoDb(string username)
+        {
+            User newUser = new User();
+            newUser.Name = username;
+            dm.Insert(newUser);
         }
     }
 }

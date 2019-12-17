@@ -15,7 +15,7 @@ namespace Rent_A_PC.TechConcepts
             this.dm = dm;
         }
 
-        
+
 
         public List<User> SortCustomer()
         {
@@ -65,7 +65,7 @@ namespace Rent_A_PC.TechConcepts
             List<User> userHasLeased = new List<User>();
             foreach (var item in pcsLeased)
             {
-                User tempUser = dm.AllUsers().Where(x => x.Id == item.Id).FirstOrDefault();
+                User tempUser = dm.AllUsers().Where(x => x.Id == item.leasedTo).FirstOrDefault();
                 userHasLeased.Add(tempUser);
             }
             return userHasLeased;
@@ -79,12 +79,14 @@ namespace Rent_A_PC.TechConcepts
         public List<User> NonLeasedUser()
         {
             List<Pc> pcsUnLeased = dm.AllPcs().Where(x => x.leasedTo == 0).ToList();
-
+            List<User> allUsers = dm.AllUsers();
             List<User> userHasNonLeased = new List<User>();
+
             foreach (var item in pcsUnLeased)
             {
-                User tempUser = dm.AllUsers().Where(x => x.Id == item.Id).FirstOrDefault();
-                userHasNonLeased.Add(tempUser);
+                userHasNonLeased = dm.AllUsers().Where(x => x.Id != item.leasedTo).ToList();
+                //User tempUser = allUsers.Where(x => x.Id == item.Id).FirstOrDefault();
+                //userHasNonLeased.Add(tempUser);
             }
             return userHasNonLeased;
         }
@@ -95,13 +97,6 @@ namespace Rent_A_PC.TechConcepts
             return pcsNonLeased;
         }
 
-        public void InsertPcIntoDb(string pcname)
-        {
-            Pc newPc = new Pc();
-            newPc.Name = pcname;
-            newPc.leasedTo = 0;
-            dm.Insert(newPc);
-        }
 
         public void DeletePcFromDb(string name)
         {
@@ -168,6 +163,20 @@ namespace Rent_A_PC.TechConcepts
             newUser.Name = newName;
 
             dm.Update(oldUser, newUser);
+        }
+
+        public void InsertPcIntoDb(string pcname)
+        {
+            Pc newPc = new Pc();
+            newPc.Name = pcname;
+            newPc.leasedTo = 0;
+            dm.Insert(newPc);
+        }
+        public void InsertUserIntoDb(string username)
+        {
+            User newUser = new User();
+            newUser.Name = username;
+            dm.Insert(newUser);
         }
     }
 }
