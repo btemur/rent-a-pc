@@ -11,16 +11,18 @@ namespace Rent_A_PC.TechConcepts
     {
         public TechConceptAsc()
         {
-
-        }
-        public List<User> SortCustomer()
-        {
-            throw new NotImplementedException();
         }
 
-        public List<Pc> SortPc()
+        public List<User> SortCustomer(List<User> users)
         {
-            throw new NotImplementedException();
+            List<User> sortedList = users.OrderBy(o => o.Name).ToList();
+            return sortedList;
+        }
+
+        public List<Pc> SortPc(List<Pc> pcs)
+        {
+            List<Pc> sortedList = pcs.OrderBy(o => o.Name).ToList();
+            return sortedList;
         }
     }
 }

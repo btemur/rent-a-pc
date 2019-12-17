@@ -9,7 +9,7 @@ namespace Rent_A_PC
 {
     interface ITechConcept
     {
-        List<Pc> SortPc();
-        List<User> SortCustomer();
+        List<Pc> SortPc(List<Pc> pcs);
+        List<User> SortCustomer(List<User> users);
     }
 }

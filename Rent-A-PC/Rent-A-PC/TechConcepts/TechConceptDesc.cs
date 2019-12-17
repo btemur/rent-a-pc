@@ -9,14 +9,22 @@ namespace Rent_A_PC.TechConcepts
 {
     class TechConceptDesc : ITechConcept
     {
-        public List<User> SortCustomer()
+        public TechConceptDesc()
         {
-            throw new NotImplementedException();
         }
 
-        public List<Pc> SortPc()
+        public List<User> SortCustomer(List<User> users)
         {
-            throw new NotImplementedException();
+            List<User> sortedList = users.OrderBy(o => o.Name).ToList();
+            sortedList.Reverse();
+            return sortedList;
+        }
+
+        public List<Pc> SortPc(List<Pc> pcs)
+        {
+            List<Pc> sortedList = pcs.OrderBy(o => o.Name).ToList();
+            sortedList.Reverse();
+            return sortedList;
         }
     }
 }
