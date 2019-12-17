@@ -4,64 +4,121 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Rent_A_PC.Model;
-using System.Data.Sql;
-using System.Data.SqlClient;
+using System.Data;
+using MySql.Data.MySqlClient;
 
 namespace Rent_A_PC.DataManagement
 {
     class DataManagementSQL : IDataManagement
     {
-        private SqlConnection con = new SqlConnection();
-
+        protected string connString = "server=localhost;port=3306;database=rent_a_pc;uid=rent-a-pc-admin;pwd=admin";
         public DataManagementSQL()
         {
-            this.con = con;
-            con.ConnectionString = "Data Source=localhost;" +
-                                   "Initial Catalog=rent_a_pc;" +
-                                   "User id=root;" +
-                                   "Password=;";
+
         }
-        public bool Delete(Pc pc)
+        //Modulare ausführung eines MySql Statements, kann variabel benutzt werden.
+        public bool MySqlRequest(string query)
         {
-            throw new NotImplementedException();
+            try
+            {
+                MySqlConnection mySqlConnection = new MySqlConnection(connString);
+                MySqlCommand mySqlCommand = mySqlConnection.CreateCommand();
+                mySqlCommand.CommandText = query;
+                mySqlCommand.ExecuteNonQuery();
+                return true;
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+                //TODO: Exception handling.
+                return false;
+            }
+        }
+        public void Delete(Pc pcs)
+        {
+            int pcid = pcs.Id;
+            string query = String.Format("DELETE FROM `pc` WHERE `pcid` = {0};", pcid);
+            bool requestResult = MySqlRequest(query);
+
+            if(requestResult == true)
+            {
+                Console.WriteLine("Delete successful");
+            }
+            else
+            {
+                Console.WriteLine("Delete failed");
+                //TODO: Handling.
+            }
         }
 
-        public bool Delete(Customer custormers)
+        public void Delete(User users)
         {
-            throw new NotImplementedException();
+            int userid = users.Id;
+            string query = String.Format("DELETE FROM `user` WHERE `userid` = {0};", userid);
+            bool requestResult = MySqlRequest(query);
+
+            if (requestResult == true)
+            {
+                Console.WriteLine("Delete successful");
+            }
+            else
+            {
+                Console.WriteLine("Delete failed");
+                //TODO: Handling.
+            }
         }
 
-        public bool Insert(List<Pc> pcs)
+        public void Insert(List<Pc> pcs)
         {
-            
-            throw new NotImplementedException();
+            foreach(var item in pcs)
+            {
+                int pcid = item.Id;
+                string pcname = item.Name;
+                int leasedto = item.leasedTo;
+                string query = String.Format("INSERT INTO `pc` (id, pc, leasedto) VALUES ({0}, `{1}`, {2});", pcid, pcname, leasedto);
+                bool requestResult = MySqlRequest(query);
+
+                if (requestResult == true)
+                {
+                    Console.WriteLine("Insert successful");
+                }
+                else
+                {
+                    Console.WriteLine("Insert failed");
+                    //TODO: Handling.
+                }
+            }
         }
 
-        public bool Insert(List<Customer> customers)
+        public void Insert(List<User> users)
         {
-            throw new NotImplementedException();
+            foreach (var item in users)
+            {
+                int userid = item.Id;
+                string username = item.Name;
+                string query = String.Format("INSERT INTO `user` (id, user) VALUES ({0}, `{1}`);", userid, username);
+                bool requestResult = MySqlRequest(query);
+
+                if (requestResult == true)
+                {
+                    Console.WriteLine("Insert successful");
+                }
+                else
+                {
+                    Console.WriteLine("Insert failed");
+                    //TODO: Handling.
+                }
+            }
         }
 
-        public bool Update(Pc pc)
+        public void Update(Pc pc)
         {
-            throw new NotImplementedException();
+            //TODO
         }
 
-        public bool Update(Customer customers)
+        public void Update(User users)
         {
-            throw new NotImplementedException();
-        }
-
-        public List<Pc> DbConnectTest()
-        {
-            List<Pc> pcs = new List<Pc>();
-            Pc pc = new Pc();
-            pc.Name = "Game Master";
-            pcs.Add(pc);
-
-            SqlCommand cmd = new SqlCommand("insert into pc", con);
-            cmd.ExecuteNonQuery();
-            return pcs;
+            //TODO
         }
     }
 }

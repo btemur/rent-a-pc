@@ -9,7 +9,7 @@ namespace Rent_A_PC.TechConcepts
 {
     class TechConceptDesc : ITechConcept
     {
-        public List<Customer> SortCustomer()
+        public List<User> SortCustomer()
         {
             throw new NotImplementedException();
         }

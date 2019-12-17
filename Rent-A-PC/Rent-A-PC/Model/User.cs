@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Rent_A_PC.Model
 {
-    class Customer
+    class User
     {
         public int Id { get; set; }
         public string Name { get; set; }

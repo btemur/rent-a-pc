@@ -13,7 +13,7 @@ namespace Rent_A_PC.TechConcepts
         {
 
         }
-        public List<Customer> SortCustomer()
+        public List<User> SortCustomer()
         {
             throw new NotImplementedException();
         }
