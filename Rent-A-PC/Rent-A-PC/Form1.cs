@@ -17,11 +17,16 @@ namespace Rent_A_PC
             InitializeComponent();
             DataManagementSQL data = new DataManagementSQL();
 
-            foreach(var item in data.AllPcs())
+            Console.WriteLine("pc");
+            foreach (var item in data.AllPcs())
             {
-                Console.WriteLine(item.Id);
-                Console.WriteLine(item.Name);
-                Console.WriteLine(item.leasedTo);
+                Console.WriteLine(item.Id + item.Name + item.leasedTo);
+            }
+            Console.WriteLine("user");
+            foreach (var item in data.AllUsers())
+            {
+                
+                Console.WriteLine(item.Id + item.Name);
             }
         }
         

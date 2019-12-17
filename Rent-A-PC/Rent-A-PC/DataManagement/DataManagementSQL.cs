@@ -119,6 +119,7 @@ namespace Rent_A_PC.DataManagement
         {
             List<User> AllUsersFromDB = new List<User>();
             MySqlConnection mySqlConnection = new MySqlConnection(connString);
+            mySqlConnection.Open();
             MySqlCommand mySqlCommand = mySqlConnection.CreateCommand();
             mySqlCommand.CommandText = "SELECT * FROM user";
             MySqlDataReader reader = mySqlCommand.ExecuteReader();
@@ -126,10 +127,12 @@ namespace Rent_A_PC.DataManagement
             while (reader.Read())
             {
                 User newUser = new User();
-                newUser.Id = int.Parse(reader["userid"].ToString());
-                newUser.Name = reader["user"].ToString();
+                newUser.Id = int.Parse(reader[0].ToString());
+                newUser.Name = reader[1].ToString();
                 AllUsersFromDB.Add(newUser);
             }
+            reader.Close();
+            mySqlConnection.Close();
             return AllUsersFromDB;
         }
 
@@ -145,15 +148,15 @@ namespace Rent_A_PC.DataManagement
             while (reader.Read())
             {
                 Pc newPc = new Pc();
-                string leased = String.Empty;
+                int leased = 0;
                 
                 if (!reader.IsDBNull(2))
                 {
-                    leased = reader[2].ToString();
+                    leased = int.Parse(reader[2].ToString());
                 }
                 newPc.Id = int.Parse(reader[0].ToString());
                 newPc.Name = reader[1].ToString();
-                newPc.leasedTo = int.Parse(leased);
+                newPc.leasedTo = leased;
                 AllPcsFromDB.Add(newPc);
             }
 
