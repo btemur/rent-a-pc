@@ -21,6 +21,10 @@ namespace Rent_A_PC
         void Update(User users);
         void Delete(User users);
 
+        //Values as List
+        List<User> AllUsers();
+        List<Pc> AllPcs();
+
         //Get Values
         //int Pc_id();
         //string Pc_name();
