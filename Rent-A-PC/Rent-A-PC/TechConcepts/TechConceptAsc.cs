@@ -4,24 +4,25 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Rent_A_PC.Model;
+using Rent_A_PC.DataManagement;
 
 namespace Rent_A_PC.TechConcepts
 {
     class TechConceptAsc : ITechConcept
     {
-        public TechConceptAsc()
+        IDataManagement dm;
+        public TechConceptAsc(IDataManagement dm)
         {
+            this.dm = dm;
         }
-
-        public List<User> SortCustomer(List<User> users)
+        public List<User> SortCustomer()
         {
-            List<User> sortedList = users.OrderBy(o => o.Name).ToList();
+            List<User> sortedList = dm.AllUsers().OrderBy(o => o.Name).ToList();
             return sortedList;
         }
-
-        public List<Pc> SortPc(List<Pc> pcs)
+        public List<Pc> SortPc()
         {
-            List<Pc> sortedList = pcs.OrderBy(o => o.Name).ToList();
+            List<Pc> sortedList = dm.AllPcs().OrderBy(o => o.Name).ToList();
             return sortedList;
         }
     }
