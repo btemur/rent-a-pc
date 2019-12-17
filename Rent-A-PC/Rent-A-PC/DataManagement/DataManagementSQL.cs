@@ -11,10 +11,19 @@ namespace Rent_A_PC.DataManagement
 {
     class DataManagementSQL : IDataManagement
     {
+        private static DataManagementSQL dataManagementSQL;
         protected string connString = "server=localhost;port=3306;database=rent_a_pc;uid=root;pwd=";
-        public DataManagementSQL()
+        private DataManagementSQL()
         {
 
+        }
+        public static DataManagementSQL GetInstance()
+        {
+            if (dataManagementSQL == null)
+            {
+                dataManagementSQL = new DataManagementSQL();
+            }
+            return dataManagementSQL;
         }
         //Modulare ausführung eines MySql Statements, kann variabel benutzt werden.
         public bool MySqlRequest(string query)
