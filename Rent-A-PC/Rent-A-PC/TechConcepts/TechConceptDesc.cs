@@ -9,12 +9,16 @@ namespace Rent_A_PC.TechConcepts
 {
     class TechConceptDesc : ITechConcept
     {
-        public List<User> SortCustomer()
+        IDataManagement dm;
+        public TechConceptDesc(IDataManagement dm)
+        {
+            this.dm = dm;
+        }
+        public List<User> SortCustomer(List<User> users)
         {
             throw new NotImplementedException();
         }
-
-        public List<Pc> SortPc()
+        public List<Pc> SortPc(List<Pc> pcs)
         {
             throw new NotImplementedException();
         }

@@ -4,6 +4,7 @@ using System.Data;
 using System.Drawing;
 using System.Linq;
 using System.Windows.Forms;
+using Rent_A_PC.TechConcepts;
 
 
 using Rent_A_PC.DataManagement;
@@ -12,24 +13,12 @@ namespace Rent_A_PC
 {
     public partial class Form1 : Form
     {
-        public Form1()
+        ITechConcept techConecpt;
+        public Form1(ITechConcept techConecpt)
         {
             InitializeComponent();
-            DataManagementSQL data = new DataManagementSQL();
-
-            Console.WriteLine("pc");
-            foreach (var item in data.AllPcs())
-            {
-                Console.WriteLine(item.Id + item.Name + item.leasedTo);
-            }
-            Console.WriteLine("user");
-            foreach (var item in data.AllUsers())
-            {
-                
-                Console.WriteLine(item.Id + item.Name);
-            }
+            this.techConecpt = techConecpt;
         }
-        
         private void TextBoxPCName_TextChanged(object sender, EventArgs e)
         {
             CheckBox checkBox = cb_LeaseState;
@@ -50,6 +39,14 @@ namespace Rent_A_PC
         private void buttonExit_Click(object sender, EventArgs e)
         {
             this.Close();
+        }
+
+        private void rbPc_CheckedChanged(object sender, EventArgs e)
+        {
+            //foreach (var item in itemsSorted.SortPc())
+            //{
+            //    listBox.Items.Add()
+            //}
         }
     }
 }

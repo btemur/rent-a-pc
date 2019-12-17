@@ -68,6 +68,7 @@
             this.rbPc.TabStop = true;
             this.rbPc.Text = "PC";
             this.rbPc.UseVisualStyleBackColor = true;
+            this.rbPc.CheckedChanged += new System.EventHandler(this.rbPc_CheckedChanged);
             // 
             // rbCustomer
             // 
