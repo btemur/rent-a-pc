@@ -11,7 +11,7 @@ namespace Rent_A_PC.DataManagement
 {
     class DataManagementSQL : IDataManagement
     {
-        protected string connString = "server=localhost;port=3306;database=rent_a_pc;uid=root;pwd=";
+        protected string connString = "server=localhost;port=3306;database=rent_a_pc;uid=root;pwd=;charset=utf8;";
         public DataManagementSQL()
         {
 
@@ -139,30 +139,32 @@ namespace Rent_A_PC.DataManagement
         public List<Pc> AllPcs()
         {
             List<Pc> AllPcsFromDB = new List<Pc>();
-            MySqlConnection mySqlConnection = new MySqlConnection(connString);
-            mySqlConnection.Open();
-            MySqlCommand mySqlCommand = mySqlConnection.CreateCommand();
-            mySqlCommand.CommandText = "SELECT * FROM pc";
-            MySqlDataReader reader = mySqlCommand.ExecuteReader();
-
-            while (reader.Read())
+            using (MySqlConnection mySqlConnection = new MySqlConnection(connString))
             {
-                Pc newPc = new Pc();
-                int leased = 0;
-                
-                if (!reader.IsDBNull(2))
-                {
-                    leased = int.Parse(reader[2].ToString());
-                }
-                newPc.Id = int.Parse(reader[0].ToString());
-                newPc.Name = reader[1].ToString();
-                newPc.leasedTo = leased;
-                AllPcsFromDB.Add(newPc);
-            }
+                mySqlConnection.Open();
+                MySqlCommand mySqlCommand = mySqlConnection.CreateCommand();
+                mySqlCommand.CommandText = "SELECT * FROM pc";
+                MySqlDataReader reader = mySqlCommand.ExecuteReader();
 
-            reader.Close();
-            mySqlConnection.Close();
-            return AllPcsFromDB;
+                while (reader.Read())
+                {
+                    Pc newPc = new Pc();
+                    int leased = 0;
+
+                    if (!reader.IsDBNull(2))
+                    {
+                        leased = int.Parse(reader[2].ToString());
+                    }
+                    newPc.Id = int.Parse(reader[0].ToString());
+                    newPc.Name = reader[1].ToString();
+                    newPc.leasedTo = leased;
+                    AllPcsFromDB.Add(newPc);
+                }
+
+                reader.Close();
+                mySqlConnection.Close();
+                return AllPcsFromDB;
+            }
         }
     }
 }

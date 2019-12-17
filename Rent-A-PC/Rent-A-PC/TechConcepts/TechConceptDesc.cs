@@ -8,25 +8,22 @@ using Rent_A_PC.DataManagement;
 
 namespace Rent_A_PC.TechConcepts
 {
-    class TechConceptDesc : ITechConcept
+    public class TechConceptDesc : ITechConcept
     {
-        public TechConceptDesc(DataManagementSQL dataSql)
+        IDataManagement dm;
+        public TechConceptDesc(IDataManagement dm)
         {
-            DataManagementSQL dataNew = dataSql;
+            this.dm = dm;
         }
-        public TechConceptDesc(DataManagementJson dataJson)
+        public List<User> SortCustomer()
         {
-            DataManagementJson dataNew = dataJson;
-        }
-        public List<User> SortCustomer(List<User> users)
-        {
-            List<User> sortedList = users.OrderBy(o => o.Name).ToList();
+            List<User> sortedList = dm.AllUsers().OrderBy(o => o.Name).ToList();
             sortedList.Reverse();
             return sortedList;
         }
-        public List<Pc> SortPc(List<Pc> pcs)
+        public List<Pc> SortPc()
         {
-            List<Pc> sortedList = pcs.OrderBy(o => o.Name).ToList();
+            List<Pc> sortedList = dm.AllPcs().OrderBy(o => o.Name).ToList();
             sortedList.Reverse();
             return sortedList;
         }

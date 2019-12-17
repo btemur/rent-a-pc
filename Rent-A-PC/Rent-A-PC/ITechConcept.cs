@@ -7,7 +7,7 @@ using Rent_A_PC.Model;
 
 namespace Rent_A_PC
 {
-    interface ITechConcept
+    public interface ITechConcept
     {
         List<Pc> SortPc();
         List<User> SortCustomer();
