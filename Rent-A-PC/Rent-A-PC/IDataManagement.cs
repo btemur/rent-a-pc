@@ -12,13 +12,13 @@ namespace Rent_A_PC
         //Pc
         //bool Save();
         void Insert(Pc pcs);
-        void Update(Pc pc);
+        void Update(Pc oldPc, Pc newPc);
         void Delete(Pc pc);
 
         //Customer
         //bool Save();
         void Insert(User users);
-        void Update(User users);
+        void Update(User oldUsers, User newUsers);
         void Delete(User users);
 
         //Values as List

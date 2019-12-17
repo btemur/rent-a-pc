@@ -109,5 +109,44 @@ namespace Rent_A_PC.TechConcepts
             newPc.leasedTo = 0;
             dm.Insert(newPc);
         }
+
+        public void DeletePcFromDb(string name)
+        {
+            Pc selectedPc = new Pc();
+            foreach (var item in dm.AllPcs())
+            {
+                if (item.Name.ToString() == name)
+                {
+                    selectedPc.Id = item.Id;
+                    selectedPc.Name = item.Name;
+                    selectedPc.leasedTo = item.leasedTo;
+                    dm.Delete(selectedPc);
+                }
+            }
+        }
+
+        public void DeleteUserFromDb(string name)
+        {
+            User selecteduser = new User();
+            foreach (var item in dm.AllUsers())
+            {
+                if (item.Name.ToString() == name)
+                {
+                    selecteduser.Id = item.Id;
+                    selecteduser.Name = item.Name;
+                    dm.Delete(selecteduser);
+                }
+            }
+        }
+
+        public void UpdatePcFromDb(string oldName, string newName)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void UpdateUserFromDb(string oldName, string newName)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

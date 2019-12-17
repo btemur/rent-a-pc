@@ -102,5 +102,72 @@ namespace Rent_A_PC.TechConcepts
             newPc.leasedTo = 0;
             dm.Insert(newPc);
         }
+
+        public void DeletePcFromDb(string name)
+        {
+            Pc selectedPc = new Pc();
+            foreach (var item in dm.AllPcs())
+            {
+                if (item.Name.ToString() == name)
+                {
+                    selectedPc.Id = item.Id;
+                    selectedPc.Name = item.Name;
+                    selectedPc.leasedTo = item.leasedTo;
+                    dm.Delete(selectedPc);
+                }
+            }
+        }
+
+        public void DeleteUserFromDb(string name)
+        {
+            User selecteduser = new User();
+            foreach (var item in dm.AllUsers())
+            {
+                if (item.Name.ToString() == name)
+                {
+                    selecteduser.Id = item.Id;
+                    selecteduser.Name = item.Name;
+                    dm.Delete(selecteduser);
+                }
+            }
+        }
+
+        public void UpdatePcFromDb(string oldName, string newName)
+        {
+            Pc newPc = new Pc();
+            Pc oldPc = new Pc();
+            foreach (var item in dm.AllPcs())
+            {
+                if (item.Name.ToString() == oldName)
+                {
+                    oldPc.Id = item.Id;
+                    oldPc.Name = item.Name;
+                    oldPc.leasedTo = item.leasedTo;
+                }
+            }
+            newPc.Id = oldPc.Id;
+            newPc.Name = newName;
+            newPc.leasedTo = oldPc.leasedTo;
+
+            dm.Update(oldPc, newPc);
+        }
+
+        public void UpdateUserFromDb(string oldName, string newName)
+        {
+            User newUser = new User();
+            User oldUser = new User();
+            foreach (var item in dm.AllUsers())
+            {
+                if (item.Name.ToString() == oldName)
+                {
+                    oldUser.Id = item.Id;
+                    oldUser.Name = item.Name;
+                }
+            }
+            newUser.Id = oldUser.Id;
+            newUser.Name = newName;
+
+            dm.Update(oldUser, newUser);
+        }
     }
 }

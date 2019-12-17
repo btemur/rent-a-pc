@@ -33,7 +33,8 @@ namespace Rent_A_PC
         }
         bool ChangeCheckBoxState(CheckBox checkBox, TextBox textBox)
         {
-            return checkBox.Enabled = String.IsNullOrWhiteSpace(textBox.Text) ? false : true;
+            //return checkBox.Enabled = String.IsNullOrWhiteSpace(textBox.Text) ? false : true;
+            return false;
         }
 
         private void buttonExit_Click(object sender, EventArgs e)
@@ -62,8 +63,8 @@ namespace Rent_A_PC
 
         private void listBox_SelectedIndexChanged(object sender, EventArgs e)
         {
-            //TODO: Activate Update Button
-            //infoBox.Text
+            buttonUpdate.Enabled = listBox.SelectedIndex >= 0 ? true : false;
+            buttonDelete.Enabled = listBox.SelectedIndex >= 0 ? true : false;
             infoBox.Clear();
             string itemText = listBox.SelectedItem.ToString();
             if(rbPc.Checked == true)
@@ -155,6 +156,41 @@ namespace Rent_A_PC
         {
             string pcname = textBoxPCName.Text.ToString();
             tc.InsertPcIntoDb(pcname);
+        }
+
+        private void buttonDelete_Click(object sender, EventArgs e)
+        {
+            string itemText = listBox.SelectedItem.ToString();
+            if (rbCustomer.Checked == true)
+            {
+                tc.DeleteUserFromDb(itemText);
+            }
+            else
+            {
+                tc.DeletePcFromDb(itemText);
+            }
+        }
+
+        private void buttonUpdate_Click(object sender, EventArgs e)
+        {
+            if (!String.IsNullOrEmpty(textBoxPCName.Text))
+            {
+                string itemText = listBox.SelectedItem.ToString();
+                string newName = textBoxPCName.Text.ToString();
+                if (rbCustomer.Checked == true)
+                {
+                    tc.UpdateUserFromDb(itemText, newName);
+                }
+                else
+                {
+                    tc.UpdatePcFromDb(itemText, newName);
+                }
+            }
+            else
+            {
+                MessageBox.Show("No new Pc name entered.");
+                //TODO handling
+            }
         }
     }
 }
