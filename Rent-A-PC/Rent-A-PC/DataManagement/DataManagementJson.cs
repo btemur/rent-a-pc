@@ -48,5 +48,15 @@ namespace Rent_A_PC.DataManagement
         {
             throw new NotImplementedException();
         }
+
+        public void Update(Pc oldPc, Pc newPc)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void Update(User oldUsers, User newUsers)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

@@ -48,7 +48,7 @@ namespace Rent_A_PC.DataManagement
         public void Delete(Pc pcs)
         {
             int pcid = pcs.Id;
-            string query = String.Format("DELETE FROM `pc` WHERE `pcid` = {0};", pcid);
+            string query = "DELETE FROM pc WHERE pcid = " + pcid + ";";
             bool requestResult = MySqlRequest(query);
 
             if (requestResult == true)
@@ -65,7 +65,7 @@ namespace Rent_A_PC.DataManagement
         public void Delete(User users)
         {
             int userid = users.Id;
-            string query = String.Format("DELETE FROM `user` WHERE `userid` = {0};", userid);
+            string query = "DELETE FROM user WHERE userid = "+ userid +";";
             bool requestResult = MySqlRequest(query);
 
             if (requestResult == true)
@@ -82,8 +82,7 @@ namespace Rent_A_PC.DataManagement
         public void Insert(Pc pcs)
         {
             string pcname = pcs.Name;
-            int leasedto = pcs.leasedTo;
-            string query = String.Format("INSERT INTO `pc` (pc, leasedto) VALUES (`{0}`, {1});", pcname, leasedto);
+            string query = "INSERT INTO pc (pc) VALUES ('"+ pcname + "');";
             bool requestResult = MySqlRequest(query);
 
             if (requestResult == true)
@@ -99,9 +98,8 @@ namespace Rent_A_PC.DataManagement
 
         public void Insert(User users)
         {
-            int userid = users.Id;
             string username = users.Name;
-            string query = String.Format("INSERT INTO `user` (id, user) VALUES ({0}, `{1}`);", userid, username);
+            string query = "INSERT INTO user (user) VALUES ('" + username + "');";
             bool requestResult = MySqlRequest(query);
 
             if (requestResult == true)
@@ -115,14 +113,28 @@ namespace Rent_A_PC.DataManagement
             }
         }
 
-        public void Update(Pc pc)
+        public void Update(Pc oldPc, Pc newPc)
         {
-            //TODO
+            int oldPcId = oldPc.Id;
+            string pcNewName = newPc.Name;
+            MySqlConnection mySqlConnection = new MySqlConnection(connString);
+            mySqlConnection.Open();
+            MySqlCommand mySqlCommand = mySqlConnection.CreateCommand();
+            mySqlCommand.CommandText = "UPDATE pc SET pc = '" + pcNewName + "' WHERE pcid = " + oldPcId;
+            mySqlCommand.ExecuteNonQuery();
+            mySqlConnection.Close();
         }
 
-        public void Update(User users)
+        public void Update(User oldUser, User newUser)
         {
-            //TODO
+            int oldUserId = oldUser.Id;
+            string userNewName = newUser.Name;
+            MySqlConnection mySqlConnection = new MySqlConnection(connString);
+            mySqlConnection.Open();
+            MySqlCommand mySqlCommand = mySqlConnection.CreateCommand();
+            mySqlCommand.CommandText = "UPDATE user SET user = '" + userNewName + "' WHERE userid = " + oldUserId;
+            mySqlCommand.ExecuteNonQuery();
+            mySqlConnection.Close();
         }
 
         public List<User> AllUsers()

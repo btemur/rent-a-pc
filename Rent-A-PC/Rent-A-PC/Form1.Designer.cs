@@ -157,6 +157,7 @@
             this.buttonUpdate.TabIndex = 10;
             this.buttonUpdate.Text = "Update";
             this.buttonUpdate.UseVisualStyleBackColor = true;
+            this.buttonUpdate.Click += new System.EventHandler(this.buttonUpdate_Click);
             // 
             // buttonDelete
             // 
@@ -167,6 +168,7 @@
             this.buttonDelete.TabIndex = 11;
             this.buttonDelete.Text = "Delete";
             this.buttonDelete.UseVisualStyleBackColor = true;
+            this.buttonDelete.Click += new System.EventHandler(this.buttonDelete_Click);
             // 
             // buttonExit
             // 
@@ -180,16 +182,16 @@
             // 
             // textBoxPCName
             // 
-            this.textBoxPCName.Location = new System.Drawing.Point(83, 327);
+            this.textBoxPCName.Location = new System.Drawing.Point(99, 327);
             this.textBoxPCName.Name = "textBoxPCName";
-            this.textBoxPCName.Size = new System.Drawing.Size(145, 20);
+            this.textBoxPCName.Size = new System.Drawing.Size(129, 20);
             this.textBoxPCName.TabIndex = 13;
             this.textBoxPCName.TextChanged += new System.EventHandler(this.TextBoxPCName_TextChanged);
             // 
             // lablePcName
             // 
             this.lablePcName.AutoSize = true;
-            this.lablePcName.Location = new System.Drawing.Point(24, 332);
+            this.lablePcName.Location = new System.Drawing.Point(3, 331);
             this.lablePcName.Name = "lablePcName";
             this.lablePcName.Size = new System.Drawing.Size(53, 13);
             this.lablePcName.TabIndex = 14;

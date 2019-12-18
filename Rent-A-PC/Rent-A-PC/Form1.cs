@@ -43,7 +43,8 @@ namespace Rent_A_PC
         }
         bool ChangeCheckBoxState(CheckBox checkBox, TextBox textBox)
         {
-            return checkBox.Enabled = String.IsNullOrWhiteSpace(textBox.Text) ? false : true;
+            //return checkBox.Enabled = String.IsNullOrWhiteSpace(textBox.Text) ? false : true;
+            return false;
         }
 
         private void buttonExit_Click(object sender, EventArgs e)
@@ -53,6 +54,7 @@ namespace Rent_A_PC
 
         private void rbPc_CheckedChanged(object sender, EventArgs e)
         {
+            lablePcName.Text = "PC Name:";
             rbFilterAll.Checked = true;
             listBox.Items.Clear();
             foreach(var item in tc.SortPc())
@@ -62,6 +64,7 @@ namespace Rent_A_PC
         }
         private void rbCustomer_CheckedChanged(object sender, EventArgs e)
         {
+            lablePcName.Text = "Customer Name:";
             rbFilterAll.Checked = true;
             listBox.Items.Clear();
             foreach (var item in tc.SortCustomer())
@@ -72,8 +75,8 @@ namespace Rent_A_PC
 
         private void listBox_SelectedIndexChanged(object sender, EventArgs e)
         {
-            //TODO: Activate Update Button
-            //infoBox.Text
+            buttonUpdate.Enabled = listBox.SelectedIndex >= 0 ? true : false;
+            buttonDelete.Enabled = listBox.SelectedIndex >= 0 ? true : false;
             infoBox.Clear();
             string itemText = listBox.SelectedItem.ToString();
             if(rbPc.Checked == true)
@@ -163,8 +166,50 @@ namespace Rent_A_PC
 
         private void buttonAddNewItem_Click(object sender, EventArgs e)
         {
-            string pcname = textBoxPCName.Text.ToString();
-            tc.InsertPcIntoDb(pcname);
+            string itemText = textBoxPCName.Text.ToString();
+            if (rbCustomer.Checked == true)
+            {
+                tc.InsertUserIntoDb(itemText);
+            }
+            else
+            {
+                tc.InsertPcIntoDb(itemText);
+            }
+        }
+
+        private void buttonDelete_Click(object sender, EventArgs e)
+        {
+            string itemText = listBox.SelectedItem.ToString();
+            if (rbCustomer.Checked == true)
+            {
+                tc.DeleteUserFromDb(itemText);
+            }
+            else
+            {
+                tc.DeletePcFromDb(itemText);
+            }
+        }
+
+        private void buttonUpdate_Click(object sender, EventArgs e)
+        {
+            if (!String.IsNullOrEmpty(textBoxPCName.Text))
+            {
+                string itemText = listBox.SelectedItem.ToString();
+                string newName = textBoxPCName.Text.ToString();
+                if (rbCustomer.Checked == true)
+                {
+                    tc.UpdateUserFromDb(itemText, newName);
+                }
+                else
+                {
+                    tc.UpdatePcFromDb(itemText, newName);
+                }
+            }
+            else
+            {
+                MessageBox.Show("No new Pc name entered.");
+                //TODO handling
+            }
         }
     }
 }

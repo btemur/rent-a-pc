@@ -19,7 +19,6 @@ namespace Rent_A_PC
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
             Application.Run(Form1.GetInstance(TechConceptDesc.GetInstance(DataManagementSQL.GetInstance())));
-            
         }
     }
 }

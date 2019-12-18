@@ -93,16 +93,17 @@ namespace Rent_A_PC.TechConcepts
         public List<User> NonLeasedUser()
         {
             List<Pc> pcsUnLeased = dm.AllPcs().Where(x => x.leasedTo == 0).ToList();
-
+            List<User> allUsers = dm.AllUsers();
             List<User> userHasNonLeased = new List<User>();
+
             foreach (var item in pcsUnLeased)
             {
-                User tempUser = dm.AllUsers().Where(x => x.Id == item.Id).FirstOrDefault();
-                userHasNonLeased.Add(tempUser);
+                userHasNonLeased = dm.AllUsers().Where(x => x.Id != item.leasedTo).ToList();
+                //User tempUser = allUsers.Where(x => x.Id == item.Id).FirstOrDefault();
+                //userHasNonLeased.Add(tempUser);
             }
             userHasNonLeased.Reverse();
             return userHasNonLeased;
-            //dm.AllUsers().Where(x => x.Id == item.Id).ToList();
         }
 
         public List<Pc> NonLeasedPc()
@@ -111,12 +112,85 @@ namespace Rent_A_PC.TechConcepts
             pcsNonLeased.Reverse();
             return pcsNonLeased;
         }
+
+        public void DeletePcFromDb(string name)
+        {
+            Pc selectedPc = new Pc();
+            foreach (var item in dm.AllPcs())
+            {
+                if (item.Name.ToString() == name)
+                {
+                    selectedPc.Id = item.Id;
+                    selectedPc.Name = item.Name;
+                    selectedPc.leasedTo = item.leasedTo;
+                    dm.Delete(selectedPc);
+                }
+            }
+        }
+
+        public void DeleteUserFromDb(string name)
+        {
+            User selecteduser = new User();
+            foreach (var item in dm.AllUsers())
+            {
+                if (item.Name.ToString() == name)
+                {
+                    selecteduser.Id = item.Id;
+                    selecteduser.Name = item.Name;
+                    dm.Delete(selecteduser);
+                }
+            }
+        }
+
+        public void UpdatePcFromDb(string oldName, string newName)
+        {
+            Pc newPc = new Pc();
+            Pc oldPc = new Pc();
+            foreach (var item in dm.AllPcs())
+            {
+                if (item.Name.ToString() == oldName)
+                {
+                    oldPc.Id = item.Id;
+                    oldPc.Name = item.Name;
+                    oldPc.leasedTo = item.leasedTo;
+                }
+            }
+            newPc.Id = oldPc.Id;
+            newPc.Name = newName;
+            newPc.leasedTo = oldPc.leasedTo;
+
+            dm.Update(oldPc, newPc);
+        }
+
+        public void UpdateUserFromDb(string oldName, string newName)
+        {
+            User newUser = new User();
+            User oldUser = new User();
+            foreach (var item in dm.AllUsers())
+            {
+                if (item.Name.ToString() == oldName)
+                {
+                    oldUser.Id = item.Id;
+                    oldUser.Name = item.Name;
+                }
+            }
+            newUser.Id = oldUser.Id;
+            newUser.Name = newName;
+
+            dm.Update(oldUser, newUser);
+        }
         public void InsertPcIntoDb(string pcname)
         {
             Pc newPc = new Pc();
             newPc.Name = pcname;
             newPc.leasedTo = 0;
             dm.Insert(newPc);
+        }
+        public void InsertUserIntoDb(string username)
+        {
+            User newUser = new User();
+            newUser.Name = username;
+            dm.Insert(newUser);
         }
     }
 }
