@@ -12,11 +12,21 @@ namespace Rent_A_PC
 {
     public partial class Form1 : Form
     {
+        private static Form1 form1;
         public ITechConcept tc;
-        public Form1(ITechConcept tc)
+        private Form1(ITechConcept tc)
         {
             InitializeComponent();
             this.tc = tc;
+        }
+
+        public static Form1 GetInstance(ITechConcept tc)
+        {
+            if (form1 == null)
+            {
+                form1 = new Form1(tc);
+            }
+            return form1;
         }
         
         private void TextBoxPCName_TextChanged(object sender, EventArgs e)

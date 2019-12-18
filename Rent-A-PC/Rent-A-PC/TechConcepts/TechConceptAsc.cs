@@ -9,14 +9,22 @@ namespace Rent_A_PC.TechConcepts
 {
     public class TechConceptAsc : ITechConcept
     {
+        private static TechConceptAsc techConceptAsc;
         public IDataManagement dm;
-        public TechConceptAsc(IDataManagement dm)
+        private TechConceptAsc(IDataManagement dm)
         {
             this.dm = dm;
         }
-
-
-
+        
+        public static TechConceptAsc GetInstance(IDataManagement dm)
+        {
+            if(techConceptAsc == null)
+            {
+                techConceptAsc = new TechConceptAsc(dm);
+            }
+            return techConceptAsc;
+        }
+        
         public List<User> SortCustomer()
         {
             List<User> sortedList = dm.AllUsers().OrderBy(o => o.Name).ToList();
