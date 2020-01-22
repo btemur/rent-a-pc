@@ -74,7 +74,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="CreateDataManagementFactory.cs" />
     <Compile Include="DataManagement\DataManagementJson.cs" />
+    <Compile Include="DataManagement\DataManagementJsonPrototype.cs" />
     <Compile Include="DataManagement\DataManagementSQL.cs" />
     <Compile Include="Form1.cs">
       <SubType>Form</SubType>
