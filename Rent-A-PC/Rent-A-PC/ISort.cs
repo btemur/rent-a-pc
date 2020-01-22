@@ -7,7 +7,7 @@ using Rent_A_PC.Model;
 
 namespace Rent_A_PC
 {
-    public interface ITechConcept
+    public interface ISort
     {
         //Weitergabe an GUI
         List<Pc> SortPc();

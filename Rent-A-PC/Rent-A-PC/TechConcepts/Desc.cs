@@ -7,42 +7,45 @@ using Rent_A_PC.Model;
 
 namespace Rent_A_PC.TechConcepts
 {
-    public class TechConceptAsc : ITechConcept
+    public class Desc : ISort
     {
-        private static TechConceptAsc techConceptAsc;
-        public IDataManagement dm;
-        private TechConceptAsc(IDataManagement dm)
+        private static Desc techConceptDesc;
+        IDataManagement dm;
+        private Desc(IDataManagement dm)
         {
             this.dm = dm;
         }
-        
-        public static TechConceptAsc GetInstance(IDataManagement dm)
+
+        public static Desc GetInstance(IDataManagement dm)
         {
-            if(techConceptAsc == null)
+            if (techConceptDesc == null)
             {
-                techConceptAsc = new TechConceptAsc(dm);
+                techConceptDesc = new Desc(dm);
             }
-            return techConceptAsc;
+            return techConceptDesc;
         }
-        
+
         public List<User> SortCustomer()
         {
             List<User> sortedList = dm.AllUsers().OrderBy(o => o.Name).ToList();
+            sortedList.Reverse();
             return sortedList;
         }
 
         public List<Pc> SortPc()
         {
             List<Pc> sortedList = dm.AllPcs().OrderBy(o => o.Name).ToList();
+            sortedList.Reverse();
             return sortedList;
         }
+
 
         public Pc GetSelectedPc(string name)
         {
             Pc selectedPc = new Pc();
-            foreach (var item in dm.AllPcs())
+            foreach(var item in dm.AllPcs())
             {
-                if (item.Name.ToString() == name)
+                if(item.Name.ToString() == name)
                 {
                     selectedPc.Id = item.Id;
                     selectedPc.Name = item.Name;
@@ -73,15 +76,18 @@ namespace Rent_A_PC.TechConcepts
             List<User> userHasLeased = new List<User>();
             foreach (var item in pcsLeased)
             {
-                User tempUser = dm.AllUsers().Where(x => x.Id == item.leasedTo).FirstOrDefault();
+                User tempUser = dm.AllUsers().Where(x => x.Id == item.Id).FirstOrDefault();
                 userHasLeased.Add(tempUser);
             }
+            userHasLeased.Reverse();
             return userHasLeased;
+            //dm.AllUsers().Where(x => x.Id == item.Id).ToList();
         }
 
         public List<Pc> LeasedPc()
         {
             List<Pc> pcsLeased = dm.AllPcs().Where(x => x.leasedTo >= 1).ToList();
+            pcsLeased.Reverse();
             return pcsLeased;
         }
         public List<User> NonLeasedUser()
@@ -96,15 +102,16 @@ namespace Rent_A_PC.TechConcepts
                 //User tempUser = allUsers.Where(x => x.Id == item.Id).FirstOrDefault();
                 //userHasNonLeased.Add(tempUser);
             }
+            userHasNonLeased.Reverse();
             return userHasNonLeased;
         }
 
         public List<Pc> NonLeasedPc()
         {
             List<Pc> pcsNonLeased = dm.AllPcs().Where(x => x.leasedTo == 0).ToList();
+            pcsNonLeased.Reverse();
             return pcsNonLeased;
         }
-
 
         public void DeletePcFromDb(string name)
         {
@@ -172,7 +179,6 @@ namespace Rent_A_PC.TechConcepts
 
             dm.Update(oldUser, newUser);
         }
-
         public void InsertPcIntoDb(string pcname)
         {
             Pc newPc = new Pc();

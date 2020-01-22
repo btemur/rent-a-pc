@@ -13,14 +13,14 @@ namespace Rent_A_PC
     public partial class Form1 : Form
     {
         private static Form1 form1;
-        public ITechConcept tc;
-        private Form1(ITechConcept tc)
+        public ISort tc;
+        private Form1(ISort tc)
         {
             InitializeComponent();
             this.tc = tc;
         }
 
-        public static Form1 GetInstance(ITechConcept tc)
+        public static Form1 GetInstance(ISort tc)
         {
             if (form1 == null)
             {
